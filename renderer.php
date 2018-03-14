@@ -390,7 +390,15 @@ class format_topcoll_renderer extends format_section_renderer_base {
      */
     protected function section_header($section, $course, $onsectionpage, $sectionreturn = null) {
         $o = '';
-
+        $subject_map = array(
+            0=>'',
+            1=>'physics',
+            2=>'chemistry',
+            3=>'mathematics',
+            4=>'bio',
+            5=>'zoo',
+            6=>'ssc',
+        );
         $sectionstyle = '';
         $rightcurrent = '';
         $context = context_course::instance($course->id);
@@ -410,6 +418,7 @@ class format_topcoll_renderer extends format_section_renderer_base {
             ($this->tcsettings['layoutcolumnorientation'] == 2)) { // Horizontal column layout.
             $sectionstyle .= ' ' . $this->get_column_class($this->tcsettings['layoutcolumns']);
         }
+        //$sectionstyle .= ' '.$subject_map[$section->_subject]; 
         $liattributes = array(
             'id' => 'section-' . $section->section,
             'class' => 'section main clearfix' . $sectionstyle,
@@ -474,7 +483,7 @@ class format_topcoll_renderer extends format_section_renderer_base {
                 $title = $this->courseformat->get_topcoll_section_name($course, $section, true);
             }
             if ((($this->mobiletheme === false) && ($this->tablettheme === false)) || ($this->userisediting)) {
-                $o .= $this->output->heading($title, 3, 'sectionname');
+                $o .= $this->output->heading($title, 3, 'sectionname '.$subject_map[$section->_subject]);
             } else {
                 $o .= html_writer::tag('h3', $title); // Moodle H3's look bad on mobile / tablet with CT so use plain.
             }

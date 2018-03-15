@@ -455,7 +455,7 @@ class format_topcoll_renderer extends format_section_renderer_base {
 
         if (($onsectionpage == false) && ($section->section != 0)) {
             $o .= html_writer::start_tag('div',
-                array('class' => 'sectionhead toggle toggle-'.$this->tcsettings['toggleiconset'],
+                array('class' => 'sectionhead toggle toggle-'.$this->tcsettings['toggleiconset'].' '.$subject_map[$section->_subject],
                 'id' => 'toggle-'.$section->section)
             );
 
@@ -483,7 +483,7 @@ class format_topcoll_renderer extends format_section_renderer_base {
                 $title = $this->courseformat->get_topcoll_section_name($course, $section, true);
             }
             if ((($this->mobiletheme === false) && ($this->tablettheme === false)) || ($this->userisediting)) {
-                $o .= $this->output->heading($title, 3, 'sectionname '.$subject_map[$section->_subject]);
+                $o .= $this->output->heading($title, 3, 'sectionname ');
             } else {
                 $o .= html_writer::tag('h3', $title); // Moodle H3's look bad on mobile / tablet with CT so use plain.
             }
